@@ -90,6 +90,10 @@ public final class Params {
     public static <S extends IConfig> IParam<S, double[]> onDoubleArray(@Nonnull final String key, final double... defaultValues) {
         return new SingleParam<>(defaultValues, key, Parsers.doubleArrayParser(), Formatters.doubleArrayFormatter());
     }
+    
+    public static <S extends IConfig> IParam<S, String[]> onStringArray(@Nonnull final String key, final String ... defaultValues) {
+        return new SingleParam<>(defaultValues, key, Parsers.stringArrayParser(), Formatters.stringArrayFormatter());
+    }
 
     //<editor-fold defaultstate="collapsed" desc="Internal implementation">
     private static final class SingleParam<S extends IConfig, P> implements IParam<S, P> {

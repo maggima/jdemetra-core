@@ -232,6 +232,11 @@ public final class Parsers {
     public static Parser<double[]> doubleArrayParser() {
         return DOUBLE_ARRAY_PARSER;
     }
+    
+    @Nonnull
+    public static Parser<String[]> stringArrayParser() {
+        return STRING_ARRAY_PARSER;
+    }
 
     @Nonnull
     public static <X, Y> Parser<Y> compose(@Nonnull final IParser<X> parser, @Nonnull final Function<X, Y> func) {
@@ -356,6 +361,24 @@ public final class Parsers {
             double[] result = new double[values.length];
             for (int i = 0; i < result.length; i++) {
                 result[i] = Double.parseDouble(values[i].trim());
+            }
+            return result;
+        }
+    };
+    
+    private static final Parser<String[]> STRING_ARRAY_PARSER = new FailSafeParser<String[]>() {
+        @Override
+        protected String[] doParse(CharSequence input) throws Exception {
+            String tmp = input.toString();
+            int beginIndex = tmp.indexOf('[');
+            int endIndex = tmp.lastIndexOf(']');
+            if (beginIndex == -1 || endIndex == -1) {
+                return null;
+            }
+            String[] values = tmp.substring(beginIndex + 1, endIndex).split("\\s*,\\s*");
+            String[] result = new String[values.length];
+            for (int i = 0; i < result.length; i++) {
+                result[i] = values[i].trim();
             }
             return result;
         }

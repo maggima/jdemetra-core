@@ -139,6 +139,8 @@ public class BasicConfiguration {
         "benchmarking.result"
     };
 
+    public static final String[] defaultSeries = {"y", "t", "sa", "s", "i", "ycal"};
+    
     private static String fileFromId(Id id) {
         int n = id.getCount();
         if (n == 0) {

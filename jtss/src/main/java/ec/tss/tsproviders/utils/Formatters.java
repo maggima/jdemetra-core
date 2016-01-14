@@ -203,6 +203,11 @@ public final class Formatters {
     public static Formatter<double[]> doubleArrayFormatter() {
         return DOUBLE_ARRAY_FORMATTER;
     }
+    
+    @Nonnull
+    public static Formatter<String[]> stringArrayFormatter() {
+        return STRING_ARRAY_FORMATTER;
+    }
 
     @Nonnull
     public static <X, Y> Formatter<Y> compose(@Nonnull final IFormatter<X> formatter, @Nonnull final Function<Y, X> func) {
@@ -352,6 +357,12 @@ public final class Formatters {
     private static final Formatter<double[]> DOUBLE_ARRAY_FORMATTER = new Formatter<double[]>() {
         @Override
         public CharSequence format(double[] value) throws NullPointerException {
+            return Arrays.toString(Objects.requireNonNull(value));
+        }
+    };
+    private static final Formatter<String[]> STRING_ARRAY_FORMATTER = new Formatter<String[]>() {
+        @Override
+        public CharSequence format(String[] value) throws NullPointerException {
             return Arrays.toString(Objects.requireNonNull(value));
         }
     };
