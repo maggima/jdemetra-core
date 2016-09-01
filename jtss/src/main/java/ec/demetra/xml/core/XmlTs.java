@@ -39,55 +39,22 @@ import ec.tstoolkit.timeseries.simplets.TsPeriod;
  */
 @XmlRootElement(name = XmlTs.RNAME)
 @XmlType(name = XmlTs.NAME)
-public class XmlTs implements IXmlConverter<TsInformation> {
+public class XmlTs extends XmlTimeSeries implements IXmlConverter<TsInformation> {
 
     static final String RNAME = "Ts", NAME = RNAME + "Type";
-
-    @XmlElement(name = "Frequency")
-    public int freq;
-    /**
-     *
-     */
-    @XmlElement(name = "FirstYear")
-    public int firstYear;
-    /**
-     *
-     */
-    @XmlElement(name = "FirstPeriod")
-    public Integer firstPeriod;
-    /**
-     *
-     */
-    @XmlElement(name = "Values")
-    @XmlList
-    public double[] data;
-
-    /**
-     *
-     */
+    
     @XmlElement(name = "MetaData")
     public XmlMetaData metaData;
 
-    /**
-     *
-     */
     @XmlAttribute
     public String name;
-    /**
-     *
-     */
+
     @XmlAttribute
     public String source;
-    /**
-     *
-     */
+
     @XmlAttribute
     public String identifier;
 
-    /**
-     *
-     * @param t
-     */
     @Override
     public void copy(TsInformation t) {
         TsData tsdata = t.data;

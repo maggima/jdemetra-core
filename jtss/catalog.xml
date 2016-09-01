@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/Users/Mats/Documents/NetbeansProjects/jdemetra-core/jtss/src/main/resources/tramoseats.xsd" uri="src/main/resources/jaxb/tramoseats-binding/tramoseats.xsd"/>
+    <system systemId="file:/C:/Users/Mats/Documents/NetbeansProjects/jdemetra-core/jtss/src/main/resources/regarima.xsd" uri="src/main/resources/jaxb/tramoseats-binding/regarima.xsd"/>
+    <system systemId="file:/C:/Users/Mats/Documents/NetbeansProjects/jdemetra-core/jtss/src/main/resources/sacore.xsd" uri="src/main/resources/jaxb/tramoseats-binding/sacore.xsd"/>
+    <system systemId="file:/C:/Users/Mats/Documents/NetbeansProjects/jdemetra-core/jtss/src/main/resources/modelling.xsd" uri="src/main/resources/jaxb/tramoseats-binding/modelling.xsd"/>
+    <system systemId="file:/C:/Users/Mats/Documents/NetbeansProjects/jdemetra-core/jtss/src/main/resources/processing.xsd" uri="src/main/resources/jaxb/tramoseats-binding/processing.xsd"/>
+    <system systemId="file:/C:/Users/Mats/Documents/NetbeansProjects/jdemetra-core/jtss/src/main/resources/core.xsd" uri="src/main/resources/jaxb/tramoseats-binding/core.xsd"/>
+    <system systemId="file:/C:/Users/Mats/Documents/NetbeansProjects/jdemetra-core/jtss/src/main/resources/arima.xsd" uri="src/main/resources/jaxb/tramoseats-binding/arima.xsd"/>
+    <system systemId="file:/C:/Users/Mats/Documents/NetbeansProjects/jdemetra-core/jtss/src/main/resources/regression.xsd" uri="src/main/resources/jaxb/tramoseats-binding/regression.xsd"/>
+    <system systemId="file:/C:/Users/Mats/Documents/NetbeansProjects/jdemetra-core/jtss/src/main/resources/calendar.xsd" uri="src/main/resources/jaxb/tramoseats-binding/calendar.xsd"/>
+</catalog>

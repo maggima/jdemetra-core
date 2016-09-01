@@ -20,7 +20,6 @@ import data.Data;
 import ec.tss.TsCollection;
 import ec.tss.TsFactory;
 import ec.tstoolkit.MetaData;
-import ec.tstoolkit.maths.matrices.Matrix;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -33,7 +32,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.util.JAXBSource;
-import javax.xml.validation.Schema;
 import javax.xml.validation.Validator;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -47,13 +45,12 @@ import xml.Schemas;
  */
 public class XmlTsCollectionTest {
     
-    private static final String FILE="c:\\localdata\\tscollection.xml";
+    private static final String FILE="c:\\localdata\\xml\\tscollection.xml";
 
     public XmlTsCollectionTest() {
     }
 
     @Test
-    @Ignore
     public void testMarshal() throws FileNotFoundException, JAXBException, IOException {
 
         JAXBContext jaxb = JAXBContext.newInstance(XmlTsCollection.class);

@@ -1,0 +1,14 @@
+<jxb:bindings version="2.1"
+              xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+              xmlns:tss="ec/eurostat/jdemetra/core">
+    <jxb:bindings schemaLocation="../processing.xsd" node="//xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="ec.eurostat.jdemetra.xml.core"/>
+        </jxb:schemaBindings>
+        <jxb:bindings node="//xsd:simpleType[@name='Context']">
+            <jxb:class name="tss:ProcessingContextType"/>
+        </jxb:bindings>
+    </jxb:bindings>
+
+</jxb:bindings>

@@ -21,9 +21,8 @@ import ec.tstoolkit.timeseries.simplets.TsData;
 import ec.tstoolkit.timeseries.simplets.TsFrequency;
 import ec.tstoolkit.timeseries.simplets.TsPeriod;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -32,30 +31,10 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlRootElement(name = XmlTsData.RNAME)
 @XmlType(name = XmlTsData.NAME)
-public class XmlTsData implements IXmlConverter<TsData> {
+@XmlSeeAlso({XmlTs.class})
+public class XmlTsData extends XmlTimeSeries implements IXmlConverter<TsData> {
 
     static final String RNAME = "TsData", NAME = RNAME + "Type";
-    /**
-     *
-     */
-    @XmlElement(name = "Frequency")
-    public int freq;
-    /**
-     *
-     */
-    @XmlElement(name = "FirstYear")
-    public int firstYear;
-    /**
-     *
-     */
-    @XmlElement(name = "FirstPeriod")
-    public Integer firstPeriod;
-    /**
-     *
-     */
-    @XmlElement(name = "Values")
-    @XmlList
-    public double[] data;
 
     @XmlAttribute(name = "name")
     public String name;

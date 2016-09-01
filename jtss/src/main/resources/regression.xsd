@@ -27,42 +27,41 @@ limitations under the Licence.
     <xs:include schemaLocation="core.xsd"/>
     <xs:include schemaLocation="calendar.xsd"/>
 
+    <xs:complexType name="RegressionVariableModifierType" abstract="true">
+        <xs:annotation>
+            <xs:documentation>
+                Regression variable modifiers are entities that modify the meaning of a modifiable regression variable
+                Examples: leads/lags, data window, (seasonal) mean corrections...
+            </xs:documentation>
+        </xs:annotation>
+    </xs:complexType>
 
-  <xs:complexType name="RegressionVariableModifierType" abstract="true">
-    <xs:annotation>
-      <xs:documentation>
-        Regression variable modifiers are entities that modify the meaning of a modifiable regression variable
-        Examples: leads/lags, data window, (seasonal) mean corrections...
-      </xs:documentation>
-    </xs:annotation>
-  </xs:complexType>
-
-  <xs:complexType name="RegressionVariableType" abstract="true">
-    <xs:annotation>
-      <xs:documentation>
-        Base type for any regression variable. 
-      </xs:documentation>
-    </xs:annotation>
-  </xs:complexType>
+    <xs:complexType name="RegressionVariableType" abstract="true">
+        <xs:annotation>
+            <xs:documentation>
+                Base type for any regression variable. 
+            </xs:documentation>
+        </xs:annotation>
+    </xs:complexType>
   
-  <xs:complexType name="ModifiableRegressionVariableType" abstract="true">
+    <xs:complexType name="ModifiableRegressionVariableType" abstract="true">
         <xs:annotation>
             <xs:documentation>
                 Base type for any modifiable regression variable. By design we can decide that some variables
                 should not be modifiable (for instance outliers)
             </xs:documentation>
         </xs:annotation>
-    <xs:complexContent>
-      <xs:extension base="tss:RegressionVariableType">
-        <xs:sequence>
-          <xs:element name="Modifier" type="tss:RegressionVariableModifierType" minOccurs="0" maxOccurs="unbounded"/>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
+        <xs:complexContent>
+            <xs:extension base="tss:RegressionVariableType">
+                <xs:sequence>
+                    <xs:element name="Modifier" type="tss:RegressionVariableModifierType" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
     </xs:complexType>
 
 
-  <!--Outliers-->
+    <!--Outliers-->
 
     <xs:complexType name="OutlierType" abstract="true">
         <xs:complexContent>
@@ -224,29 +223,29 @@ limitations under the Licence.
 
 
  
-  <xs:complexType name="UserVariableType" abstract = "true">
-    <xs:complexContent>
-      <xs:extension base="tss:ModifiableRegressionVariableType">
-        <xs:sequence>
-          <xs:element name="Variable" type="xs:IDREF"/>
-        </xs:sequence>
-        <xs:attribute name="effect" type="tss:ComponentEnum" use="required"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
+    <xs:complexType name="UserVariableType" abstract = "true">
+        <xs:complexContent>
+            <xs:extension base="tss:ModifiableRegressionVariableType">
+                <xs:sequence>
+                    <xs:element name="Variable" type="xs:IDREF"/>
+                </xs:sequence>
+                <xs:attribute name="effect" type="tss:ComponentEnum" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
-  <xs:complexType name="UserVariablesType" abstract = "true">
-    <xs:complexContent>
-      <xs:extension base="tss:ModifiableRegressionVariableType">
-        <xs:sequence>
-          <xs:element name="Variable" type="xs:IDREFS"/>
-        </xs:sequence>
-        <xs:attribute name="effect" type="tss:ComponentEnum" use="required"/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
+    <xs:complexType name="UserVariablesType" abstract = "true">
+        <xs:complexContent>
+            <xs:extension base="tss:ModifiableRegressionVariableType">
+                <xs:sequence>
+                    <xs:element name="Variable" type="xs:IDREFS"/>
+                </xs:sequence>
+                <xs:attribute name="effect" type="tss:ComponentEnum" use="required"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
-  <!-- Modifiers -->
+    <!-- Modifiers -->
     <!-- ********* -->
     
     
@@ -328,6 +327,7 @@ limitations under the Licence.
     <xs:complexType name="RegressionType">
         <xs:annotation>
             <xs:documentation>
+                Regression Type
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -336,6 +336,7 @@ limitations under the Licence.
     </xs:complexType>
 
     <xs:element name="Regression" type="tss:RegressionType"/>
+    <xs:element name="RegressionItem" type="tss:RegressionItemType"/>
 
 </xs:schema>
 

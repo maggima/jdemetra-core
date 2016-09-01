@@ -1,0 +1,65 @@
+<jxb:bindings version="2.1"
+              xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+              xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+              xmlns:trs="ec/eurostat/jdemetra/sa/tramoseats"
+              xmlns:x13="ec/eurostat/jdemetra/sa/x13"
+              xmlns:tss="ec/eurostat/jdemetra/core">
+    <jxb:bindings schemaLocation="../core.xsd" node="//xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="ec.eurostat.jdemetra.xml.core"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="../sacore.xsd" node="//xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="ec.eurostat.jdemetra.xml.sa"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="../modelling.xsd" node="//xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="ec.eurostat.jdemetra.xml.modelling"/>
+        </jxb:schemaBindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="../tramoseats.xsd" node="//xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="ec.eurostat.jdemetra.xml.sa.tramoseats"/>
+        </jxb:schemaBindings>
+        <jxb:bindings node="//xsd:complexType[@name='TransformationSpecType']">
+            <jxb:class name="trs:TransformationSpecType"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='CalendarSpecType']">
+            <jxb:class name="trs:CalendarSpecType"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='RegressionSpecType']">
+            <jxb:class name="trs:RegressionSpecType"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='EstimationSpecType']">
+            <jxb:class name="trs:EstimationSpecType"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='OutlierSpecType']">
+            <jxb:class name="trs:OutlierSpecType"/>
+        </jxb:bindings>
+    </jxb:bindings>
+    <jxb:bindings schemaLocation="../x13.xsd" node="//xsd:schema">
+        <jxb:schemaBindings>
+            <jxb:package name="ec.eurostat.jdemetra.xml.sa.x13"/>
+        </jxb:schemaBindings>
+        <jxb:bindings node="//xsd:complexType[@name='TransformationSpecType']">
+            <jxb:class name="x13:TransformationSpecType"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='CalendarSpecType']">
+            <jxb:class name="x13:CalendarSpecType"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='RegressionSpecType']">
+            <jxb:class name="x13:RegressionSpecType"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='EstimationSpecType']">
+            <jxb:class name="x13:EstimationSpecType"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='OutlierSpecType']">
+            <jxb:class name="x13:OutlierSpecType"/>
+        </jxb:bindings>
+        <jxb:bindings node="//xsd:complexType[@name='SeriesSpecType']">
+            <jxb:class name="x13:SeriesSpecType"/>
+        </jxb:bindings>
+    </jxb:bindings>
+</jxb:bindings>

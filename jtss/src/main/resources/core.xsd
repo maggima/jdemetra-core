@@ -503,5 +503,496 @@ limitations under the Licence.
     <xs:element name="Ts" type="tss:TsType"/>
     <xs:element name="TsCollection" type="tss:TsCollectionType"/>
     <xs:element name="VariablesDictionary" type="tss:TsVariablesType"/>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <xs:complexType name="ARIMA_ModelType" abstract="true">
+        <xs:annotation>
+            <xs:documentation>
+                Arima model.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="name" type="xs:string" use="optional"/>
+    </xs:complexType>
 
+    <xs:complexType name="Default_ARIMA_ModelType">
+        <xs:annotation>
+            <xs:documentation>
+                Description of an Arima model, defined by auto-regressive polynomials (stationary and non stationary)
+                and moving average polynmials.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tss:ARIMA_ModelType">
+                <xs:sequence>
+                    <xs:element name="AR" type="tss:ParametersType" minOccurs="0"/>
+                    <xs:element name="D" type="tss:ParametersType" minOccurs="0"/>
+                    <xs:element name="MA" type="tss:ParametersType" minOccurs="0"/>
+                    <xs:element name="InnovationVariance" type="xs:double" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SARIMA_OrderType">
+        <xs:sequence>
+            <xs:element name="P" type="xs:unsignedShort">
+                <xs:annotation>
+                    <xs:documentation>
+                        Regular auto-regressive order
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="D" type="xs:unsignedShort">
+                <xs:annotation>
+                    <xs:documentation>
+                        Regular differencing order.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="Q"  type="xs:unsignedShort">
+                <xs:annotation>
+                    <xs:documentation>
+                        Regular moving average order.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BP" type="xs:unsignedShort">
+                <xs:annotation>
+                    <xs:documentation>
+                        Seasonal auto-regressive order.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BD" type="xs:unsignedShort">
+                <xs:annotation>
+                    <xs:documentation>
+                        Seasonal auto-regressive order.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="BQ" type="xs:unsignedShort">
+                <xs:annotation>
+                    <xs:documentation>
+                        Seasonal moving average order.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SARIMA_ModelType">
+        <xs:annotation>
+            <xs:documentation>
+                Description of a Box and Jenkins seasonal Arima model, defined by auto-regressive (stationary and non stationary)
+                and moving average regular and seasonal polynmials.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tss:ARIMA_ModelType">
+                <xs:sequence>
+                    <xs:element name="AR" type="tss:ParametersType" minOccurs="0"/>
+                    <xs:element name="D" type="xs:unsignedInt" minOccurs="0"/>
+                    <xs:element name="MA" type="tss:ParametersType" minOccurs="0"/>
+                    <xs:element name="S" type="xs:unsignedInt" minOccurs="0"/>
+                    <xs:element name="SAR" type="tss:ParametersType" minOccurs="0"/>
+                    <xs:element name="SD" type="xs:unsignedInt" minOccurs="0"/>
+                    <xs:element name="SMA" type="tss:ParametersType" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="UCARIMA_ModelType">
+        <xs:annotation>
+            <xs:documentation>
+                An UCARIMA model is a list of arima models with independent innovation variances.
+                The sum of the models may be added.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Sum" type="tss:ARIMA_ModelType" minOccurs="0"/>
+            <xs:element name="Component" type="tss:ARIMA_ModelType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:element name="SarimaOrder" type="tss:SARIMA_OrderType"/>
+    <xs:element name="Arima" type="tss:Default_ARIMA_ModelType"/>
+    <xs:element name="Sarima" type="tss:SARIMA_ModelType"/>
+    <xs:element name="Ucarima" type="tss:UCARIMA_ModelType"/>
+
+    
+    
+    
+    
+    <xs:complexType name="AlgorithmDescriptionType">
+        <xs:annotation>
+            <xs:documentation>
+                Description of an algorithm
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Name" type="xs:string"/>
+            <xs:element name="Family" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="version" type="xs:NMTOKEN" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="ProcessingContextType">
+        <xs:annotation>
+            <xs:documentation>
+
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Variables" type="tss:TsVariablesType"/>
+            <xs:element name="Calendars" type="tss:CalendarsType"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="StatisticalTestType">
+        <xs:annotation>
+            <xs:documentation>
+                Standard statistical test
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Description" type="xs:string"/>
+            <xs:element name="Value" type="xs:double"/>
+            <xs:element name="Pvalue" type="xs:double"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="RegressionEstimateType">
+        <xs:annotation>
+            <xs:documentation>
+                Result of a regression
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Description" type="xs:string"/>
+            <xs:element name="Coefficient" type="xs:double"/>
+            <xs:element name="Stde" type="xs:double"/>
+        </xs:sequence>
+        <xs:attribute name="prespecified" type="xs:boolean"/>
+    </xs:complexType>
+
+    <!-- Information set -->
+
+    <xs:complexType name="InformationType">
+        <xs:annotation>
+            <xs:documentation>
+                Generic information, using predefined atomic types
+            </xs:documentation>
+        </xs:annotation>
+        <xs:choice>
+            <xs:element name="Boolean" type="xs:boolean"/>
+            <xs:element name="Double" type="xs:double"/>
+            <xs:element name="Integer" type="xs:int"/>
+            <xs:element name="String" type="xs:string"/>
+            <xs:element name="Integers" type="tss:Ints"/>
+            <xs:element name="Doubles" type="tss:Doubles"/>
+            <xs:element name="Booleans" type="tss:Booleans"/>
+            <xs:element name="Strings" type="xs:NMTOKENS"/>
+            <xs:element name="Subset" type="tss:InformationSetType"/>
+            <xs:element name="TsData" type="tss:TsDataType"/>
+            <xs:element name="Ts" type="tss:TsType"/>
+            <xs:element name="TsCollection" type="tss:TsCollectionType"/>
+            <xs:element name="RegressionEstimate" type="tss:RegressionEstimateType"/>
+            <xs:element name="StatisticalTest" type="tss:StatisticalTestType"/>
+            <xs:element name="Parameter" type="tss:ParameterType"/>
+            <xs:element name="Parameters" type="tss:ParametersType"/>
+            <xs:element name="Matrix" type="tss:MatrixType"/>
+        </xs:choice>
+        <xs:attribute name="name" type="xs:string" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="InformationSetType">
+        <xs:annotation>
+            <xs:documentation>
+                Generic information set, which is a collection of atomic information
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Item" type="tss:InformationType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Batch processing -->
+
+    <xs:simpleType name="LinkType">
+        <xs:annotation>
+            <xs:documentation>
+                Types of link between processing steps. It indicates where
+                considered information should come from
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Input" />
+            <xs:enumeration value="Output" />
+            <xs:enumeration value="Result" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="BatchLinkType">
+        <xs:annotation>
+            <xs:documentation>
+                Links between different steps of a batch processing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+        </xs:sequence>
+        <xs:attribute name="linktype" type="tss:LinkType" use="required"/>
+        <xs:attribute name="linkid" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="BatchStepType">
+        <xs:annotation>
+            <xs:documentation>
+                Step of a batch processing
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Link" type="tss:BatchLinkType"/>
+            <xs:element name="Specification" type="tss:InformationSetType"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <xs:complexType name="BatchType">
+        <xs:annotation>
+            <xs:documentation>
+                Batch processing
+                A batch processing is defined by a context (optional),
+                an input, several steps and possible filters
+                Each step must be able to retrieve necessary information
+                for its processing either from the input or from a previous step
+                (through the "link" element).
+                The (optional) filters specify what information
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Context" type="tss:ProcessingContextType"/>
+            <xs:element name="Input" type="tss:InformationSetType" minOccurs="1"/>
+            <xs:element name="Step" type="tss:BatchStepType" minOccurs="1" maxOccurs="unbounded"/>
+            <xs:element name="Filter" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:string" use="required"/>
+    </xs:complexType>
+    
+    <xs:element name="TsVariables" type="tss:TsVariablesType"/>
+    <xs:element name="InformationSet" type="tss:InformationSetType"/>
+    <xs:element name="Batch" type="tss:BatchType"/>
+    <xs:element name="ProcessingContext" type="tss:ProcessingContextType"/>
+    
+    
+    
+    <!-- Calendars -->
+    <xs:simpleType name="DayEvent">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="NewYear" />
+            <xs:enumeration value="ShroveMonday" />
+            <xs:enumeration value="ShroveTuesday" />
+            <xs:enumeration value="AshWednesday" />
+            <xs:enumeration value="Easter" />
+            <xs:enumeration value="EasterThursday" />
+            <xs:enumeration value="MaundyThursday" />
+            <xs:enumeration value="EasterFryday" />
+            <xs:enumeration value="EasterMonday" />
+            <xs:enumeration value="Ascension" />
+            <xs:enumeration value="Pentecost" />
+            <xs:enumeration value="WhitMonday" />
+            <xs:enumeration value="Assumption" />
+            <xs:enumeration value="CorpusChristi" />
+            <xs:enumeration value="AllSaintsDay" />
+            <xs:enumeration value="Christmas" />
+            <xs:enumeration value="LaborDay" />
+            <xs:enumeration value="Thanksgiving" />
+            <xs:enumeration value="MayDay" />
+            <xs:enumeration value="Halloween" />
+        </xs:restriction>
+    </xs:simpleType>
+
+  <xs:simpleType name="LengthOfPeriodEnum">
+    <xs:annotation>
+      <xs:documentation>
+        Leap year or equivalent
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="LeapYear" />
+      <xs:enumeration value="LengthOfPeriod" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="TradingDaysEnum">
+    <xs:annotation>
+      <xs:documentation>
+        Trading days or equivalent
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:NMTOKEN">
+      <xs:enumeration value="TradingDays" />
+      <xs:enumeration value="WorkingDays" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="DayType" abstract="true">
+      <xs:attribute name="Weight" type="xs:double" use="optional"/>
+   </xs:complexType>
+    
+    <xs:complexType name="FixedDayType">
+        <xs:annotation>
+            <xs:documentation>
+                Fixed day in each year, identified by the month and the day in the month.
+                Example: 21th of July
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tss:DayType">
+                <xs:sequence>
+                     <xs:element name="Month" type="tss:MonthEnum" />
+                    <xs:element name="Day" type="xs:int" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="FixedWeekDayType">
+        <xs:annotation>
+            <xs:documentation>
+                Fixed week day, identified by the day if the week, the week of the month and the month.
+                Example: Labor Day, second tuesday of september.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tss:DayType">
+                <xs:sequence>
+                    <xs:element name="Month" type="tss:MonthEnum" />
+                    <xs:element name="DayofWeek" type="tss:DayOfWeekEnum" />
+                    <xs:element name="Week" type="tss:WeekEnum"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="EasterRelatedDayType">
+        <xs:annotation>
+            <xs:documentation>
+                Day identified by its position related to Easter.
+                Example: 20th day after Easter.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tss:DayType">
+                <xs:sequence>
+                    <xs:element name="Offset" type="xs:short" />
+                </xs:sequence>
+                <xs:attribute name="julian" type="xs:boolean" use="optional" default="false"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="SpecialCalendarDayType">
+        <xs:annotation>
+            <xs:documentation>
+                Day identified by its position related to some prespecified days.
+                Example: 3 days after Christmas, 1 day before Labor Day...
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Event" type="tss:DayEvent" />
+            <xs:element name="Offset" type="xs:short" default="0" minOccurs="0" />
+         </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SpecialDayEventType">
+        <xs:annotation>
+            <xs:documentation>
+                A special day event is a special day, valid on a given time span.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Day" type="tss:DayType"/>
+            <xs:group ref="tss:TimeSpan" id="Validity" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="AbstractCalendarType" abstract="true">
+        <xs:attribute name="name" type="xs:ID" use="required" />
+    </xs:complexType>
+
+    <xs:complexType name="NationalCalendarType">
+        <xs:annotation>
+            <xs:documentation>
+                A national calendar is defined by a list of special day events. It may have a name,
+                which may be used in derived calendars
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tss:AbstractCalendarType">
+                <xs:sequence>
+                    <xs:element name="SpecialDayEvent" type="tss:SpecialDayEventType" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="CompositeCalendarType">
+        <xs:annotation>
+            <xs:documentation>
+                A composite calendar is a weighted sum of other calendars, identified by their IDs.
+                Those calendars should be stored in a given dictionary.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tss:AbstractCalendarType">
+                <xs:sequence>
+                    <xs:element name="WeightedCalendar" type="tss:WeightedItem" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="ChainedCalendarType">
+        <xs:annotation>
+            <xs:documentation>
+                A chained calendar is a pair of calendars, which are paste from a given date.
+                More precisely, the first calendar is used up to the given date (excluded) and is replaced
+                by the second calendar from that date (included)
+                Both calendars should be stored in a given dictionary.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tss:AbstractCalendarType">
+                <xs:sequence>
+                    <xs:element name="StartCalendar" type="xs:IDREF" />
+                    <xs:element name="EndCalendar" type="xs:IDREF" />
+                    <xs:element name="CalendarBreak" type="xs:date" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+ 
+    <xs:complexType name="CalendarsType">
+        <xs:annotation>
+            <xs:documentation>
+                Collection of calendars.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="Calendar" type="tss:AbstractCalendarType" minOccurs="0" maxOccurs="unbounded"/>        
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="Calendars" type="tss:CalendarsType"/>
 </xs:schema>

@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bindings version="2.1" xmlns="http://java.sun.com/xml/ns/jaxb">
+  <!--
+
+Ce fichier a été généré par l'implémentation de référence JavaTM Architecture for XML Binding (JAXB), v2.2.11 
+Voir <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
+Toute modification apportée à ce fichier sera perdue lors de la recompilation du schéma source. 
+Généré le : 2016.08.16 à 04:05:48 PM CEST 
+
+  -->
+  <bindings scd="x-schema::tns" xmlns:tns="ec/eurostat/jdemetra/core">
+    <schemaBindings map="false">
+      <package name="ec.eurostat.jdemetra.core"/>
+    </schemaBindings>
+    <bindings scd="~tns:TsCollectionType">
+      <class ref="ec.eurostat.jdemetra.core.TsCollectionType"/>
+    </bindings>
+    <bindings scd="~tns:MatrixType">
+      <class ref="ec.eurostat.jdemetra.core.MatrixType"/>
+    </bindings>
+    <bindings scd="~tns:TsDataType">
+      <class ref="ec.eurostat.jdemetra.core.TsDataType"/>
+    </bindings>
+    <bindings scd="~tns:MetaDataType">
+      <class ref="ec.eurostat.jdemetra.core.MetaDataType"/>
+    </bindings>
+    <bindings scd="~tns:TsType">
+      <class ref="ec.eurostat.jdemetra.core.TsType"/>
+    </bindings>
+    <bindings scd="~tns:TsVariablesType">
+      <class ref="ec.eurostat.jdemetra.core.TsVariablesType"/>
+    </bindings>
+    <bindings scd="~tns:Default_ARIMA_ModelType">
+      <class ref="ec.eurostat.jdemetra.core.DefaultARIMAModelType"/>
+    </bindings>
+    <bindings scd="~tns:SARIMA_ModelType">
+      <class ref="ec.eurostat.jdemetra.core.SARIMAModelType"/>
+    </bindings>
+    <bindings scd="~tns:UCARIMA_ModelType">
+      <class ref="ec.eurostat.jdemetra.core.UCARIMAModelType"/>
+    </bindings>
+    <bindings scd="~tns:CalendarsType">
+      <class ref="ec.eurostat.jdemetra.core.CalendarsType"/>
+    </bindings>
+    <bindings scd="~tns:RegressionType">
+      <class ref="ec.eurostat.jdemetra.core.RegressionType"/>
+    </bindings>
+    <bindings scd="~tns:ProcessingContextType">
+      <class ref="ec.eurostat.jdemetra.core.ProcessingContextType"/>
+    </bindings>
+    <bindings scd="~tns:InformationSetType">
+      <class ref="ec.eurostat.jdemetra.core.InformationSetType"/>
+    </bindings>
+    <bindings scd="~tns:BatchType">
+      <class ref="ec.eurostat.jdemetra.core.BatchType"/>
+    </bindings>
+    <bindings scd="~tns:PropertyType">
+      <class ref="ec.eurostat.jdemetra.core.PropertyType"/>
+    </bindings>
+    <bindings scd="~tns:ParameterType">
+      <class ref="ec.eurostat.jdemetra.core.ParameterType"/>
+    </bindings>
+    <bindings scd="~tns:IndexedParameterType">
+      <class ref="ec.eurostat.jdemetra.core.IndexedParameterType"/>
+    </bindings>
+    <bindings scd="~tns:ParametersType">
+      <class ref="ec.eurostat.jdemetra.core.ParametersType"/>
+    </bindings>
+    <bindings scd="~tns:PeriodSelectionType">
+      <class ref="ec.eurostat.jdemetra.core.PeriodSelectionType"/>
+    </bindings>
+    <bindings scd="~tns:TimePeriodType">
+      <class ref="ec.eurostat.jdemetra.core.TimePeriodType"/>
+    </bindings>
+    <bindings scd="~tns:TimeDomainType">
+      <class ref="ec.eurostat.jdemetra.core.TimeDomainType"/>
+    </bindings>
+    <bindings scd="~tns:TimeSeriesType">
+      <class ref="ec.eurostat.jdemetra.core.TimeSeriesType"/>
+    </bindings>
+    <bindings scd="~tns:TsPeriodType">
+      <class ref="ec.eurostat.jdemetra.core.TsPeriodType"/>
+    </bindings>
+    <bindings scd="~tns:TsDomainType">
+      <class ref="ec.eurostat.jdemetra.core.TsDomainType"/>
+    </bindings>
+    <bindings scd="~tns:TsMonikerType">
+      <class ref="ec.eurostat.jdemetra.core.TsMonikerType"/>
+    </bindings>
+    <bindings scd="~tns:TsVariableType">
+      <class ref="ec.eurostat.jdemetra.core.TsVariableType"/>
+    </bindings>
+    <bindings scd="~tns:StaticTsVariableType">
+      <class ref="ec.eurostat.jdemetra.core.StaticTsVariableType"/>
+    </bindings>
+    <bindings scd="~tns:DynamicTsVariableType">
+      <class ref="ec.eurostat.jdemetra.core.DynamicTsVariableType"/>
+    </bindings>
+    <bindings scd="~tns:WeightedItem">
+      <class ref="ec.eurostat.jdemetra.core.WeightedItem"/>
+    </bindings>
+    <bindings scd="~tns:ARIMA_ModelType">
+      <class ref="ec.eurostat.jdemetra.core.ARIMAModelType"/>
+    </bindings>
+    <bindings scd="~tns:SARIMA_OrderType">
+      <class ref="ec.eurostat.jdemetra.core.SARIMAOrderType"/>
+    </bindings>
+    <bindings scd="~tns:DayType">
+      <class ref="ec.eurostat.jdemetra.core.DayType"/>
+    </bindings>
+    <bindings scd="~tns:FixedDayType">
+      <class ref="ec.eurostat.jdemetra.core.FixedDayType"/>
+    </bindings>
+    <bindings scd="~tns:FixedWeekDayType">
+      <class ref="ec.eurostat.jdemetra.core.FixedWeekDayType"/>
+    </bindings>
+    <bindings scd="~tns:EasterRelatedDayType">
+      <class ref="ec.eurostat.jdemetra.core.EasterRelatedDayType"/>
+    </bindings>
+    <bindings scd="~tns:SpecialCalendarDayType">
+      <class ref="ec.eurostat.jdemetra.core.SpecialCalendarDayType"/>
+    </bindings>
+    <bindings scd="~tns:SpecialDayEventType">
+      <class ref="ec.eurostat.jdemetra.core.SpecialDayEventType"/>
+    </bindings>
+    <bindings scd="~tns:AbstractCalendarType">
+      <class ref="ec.eurostat.jdemetra.core.AbstractCalendarType"/>
+    </bindings>
+    <bindings scd="~tns:NationalCalendarType">
+      <class ref="ec.eurostat.jdemetra.core.NationalCalendarType"/>
+    </bindings>
+    <bindings scd="~tns:CompositeCalendarType">
+      <class ref="ec.eurostat.jdemetra.core.CompositeCalendarType"/>
+    </bindings>
+    <bindings scd="~tns:ChainedCalendarType">
+      <class ref="ec.eurostat.jdemetra.core.ChainedCalendarType"/>
+    </bindings>
+    <bindings scd="~tns:RegressionVariableModifierType">
+      <class ref="ec.eurostat.jdemetra.core.RegressionVariableModifierType"/>
+    </bindings>
+    <bindings scd="~tns:RegressionVariableType">
+      <class ref="ec.eurostat.jdemetra.core.RegressionVariableType"/>
+    </bindings>
+    <bindings scd="~tns:ModifiableRegressionVariableType">
+      <class ref="ec.eurostat.jdemetra.core.ModifiableRegressionVariableType"/>
+    </bindings>
+    <bindings scd="~tns:OutlierType">
+      <class ref="ec.eurostat.jdemetra.core.OutlierType"/>
+    </bindings>
+    <bindings scd="~tns:AdditiveOutlierType">
+      <class ref="ec.eurostat.jdemetra.core.AdditiveOutlierType"/>
+    </bindings>
+    <bindings scd="~tns:LevelShiftType">
+      <class ref="ec.eurostat.jdemetra.core.LevelShiftType"/>
+    </bindings>
+    <bindings scd="~tns:SeasonalOutlierType">
+      <class ref="ec.eurostat.jdemetra.core.SeasonalOutlierType"/>
+    </bindings>
+    <bindings scd="~tns:TransitoryChangeType">
+      <class ref="ec.eurostat.jdemetra.core.TransitoryChangeType"/>
+    </bindings>
+    <bindings scd="~tns:DefaulTradingDaysType">
+      <class ref="ec.eurostat.jdemetra.core.DefaulTradingDaysType"/>
+    </bindings>
+    <bindings scd="~tns:GenericTradingDaysType">
+      <class ref="ec.eurostat.jdemetra.core.GenericTradingDaysType"/>
+    </bindings>
+    <bindings scd="~tns:EasterVariableType">
+      <class ref="ec.eurostat.jdemetra.core.EasterVariableType"/>
+    </bindings>
+    <bindings scd="~tns:RampType">
+      <class ref="ec.eurostat.jdemetra.core.RampType"/>
+    </bindings>
+    <bindings scd="~tns:InterventionVariableType">
+      <class ref="ec.eurostat.jdemetra.core.InterventionVariableType"/>
+    </bindings>
+    <bindings scd="~tns:UserVariableType">
+      <class ref="ec.eurostat.jdemetra.core.UserVariableType"/>
+    </bindings>
+    <bindings scd="~tns:UserVariablesType">
+      <class ref="ec.eurostat.jdemetra.core.UserVariablesType"/>
+    </bindings>
+    <bindings scd="~tns:VariableWindowType">
+      <class ref="ec.eurostat.jdemetra.core.VariableWindowType"/>
+    </bindings>
+    <bindings scd="~tns:LaggedVariableType">
+      <class ref="ec.eurostat.jdemetra.core.LaggedVariableType"/>
+    </bindings>
+    <bindings scd="~tns:SeriesTransformationType">
+      <class ref="ec.eurostat.jdemetra.core.SeriesTransformationType"/>
+    </bindings>
+    <bindings scd="~tns:LogTransformationType">
+      <class ref="ec.eurostat.jdemetra.core.LogTransformationType"/>
+    </bindings>
+    <bindings scd="~tns:BoxCoxTransformationType">
+      <class ref="ec.eurostat.jdemetra.core.BoxCoxTransformationType"/>
+    </bindings>
+    <bindings scd="~tns:LengthOfPeriodAdjustmentType">
+      <class ref="ec.eurostat.jdemetra.core.LengthOfPeriodAdjustmentType"/>
+    </bindings>
+    <bindings scd="~tns:SeriesTransformationsType">
+      <class ref="ec.eurostat.jdemetra.core.SeriesTransformationsType"/>
+    </bindings>
+    <bindings scd="~tns:RegressionItemType">
+      <class ref="ec.eurostat.jdemetra.core.RegressionItemType"/>
+    </bindings>
+    <bindings scd="~tns:AlgorithmDescriptionType">
+      <class ref="ec.eurostat.jdemetra.core.AlgorithmDescriptionType"/>
+    </bindings>
+    <bindings scd="~tns:StatisticalTestType">
+      <class ref="ec.eurostat.jdemetra.core.StatisticalTestType"/>
+    </bindings>
+    <bindings scd="~tns:RegressionEstimateType">
+      <class ref="ec.eurostat.jdemetra.core.RegressionEstimateType"/>
+    </bindings>
+    <bindings scd="~tns:InformationType">
+      <class ref="ec.eurostat.jdemetra.core.InformationType"/>
+    </bindings>
+    <bindings scd="~tns:BatchLinkType">
+      <class ref="ec.eurostat.jdemetra.core.BatchLinkType"/>
+    </bindings>
+    <bindings scd="~tns:BatchStepType">
+      <class ref="ec.eurostat.jdemetra.core.BatchStepType"/>
+    </bindings>
+    <bindings scd="~tns:RegArimaModelType">
+      <class ref="ec.eurostat.jdemetra.core.RegArimaModelType"/>
+    </bindings>
+    <bindings scd="~tns:GenericRegArimaModelType">
+      <class ref="ec.eurostat.jdemetra.core.GenericRegArimaModelType"/>
+    </bindings>
+    <bindings scd="~tns:MonthEnum">
+      <typesafeEnumClass ref="ec.eurostat.jdemetra.core.MonthEnum"/>
+    </bindings>
+    <bindings scd="~tns:DayOfWeekEnum">
+      <typesafeEnumClass ref="ec.eurostat.jdemetra.core.DayOfWeekEnum"/>
+    </bindings>
+    <bindings scd="~tns:ComponentEnum">
+      <typesafeEnumClass ref="ec.eurostat.jdemetra.core.ComponentEnum"/>
+    </bindings>
+    <bindings scd="~tns:ParameterInfoEnum">
+      <typesafeEnumClass ref="ec.eurostat.jdemetra.core.ParameterInfoEnum"/>
+    </bindings>
+    <bindings scd="~tns:DayEvent">
+      <typesafeEnumClass ref="ec.eurostat.jdemetra.core.DayEvent"/>
+    </bindings>
+    <bindings scd="~tns:LengthOfPeriodEnum">
+      <typesafeEnumClass ref="ec.eurostat.jdemetra.core.LengthOfPeriodEnum"/>
+    </bindings>
+    <bindings scd="~tns:TradingDaysEnum">
+      <typesafeEnumClass ref="ec.eurostat.jdemetra.core.TradingDaysEnum"/>
+    </bindings>
+    <bindings scd="~tns:EasterCorrectionEnum">
+      <typesafeEnumClass ref="ec.eurostat.jdemetra.core.EasterCorrectionEnum"/>
+    </bindings>
+    <bindings scd="~tns:LinkType">
+      <typesafeEnumClass ref="ec.eurostat.jdemetra.core.LinkType"/>
+    </bindings>
+  </bindings>
+  <bindings scd="x-schema::tns" xmlns:tns="ec/eurostat/jdemetra/sa">
+    <schemaBindings map="false">
+      <package name="ec.eurostat.jdemetra.sa"/>
+    </schemaBindings>
+    <bindings scd="~tns:ComponentEstimationType">
+      <class ref="ec.eurostat.jdemetra.sa.ComponentEstimationType"/>
+    </bindings>
+    <bindings scd="~tns:SaDecompositionType">
+      <class ref="ec.eurostat.jdemetra.sa.SaDecompositionType"/>
+    </bindings>
+    <bindings scd="~tns:DecompositionSpecType">
+      <class ref="ec.eurostat.jdemetra.sa.DecompositionSpecType"/>
+    </bindings>
+    <bindings scd="~tns:SaSpecificationType">
+      <class ref="ec.eurostat.jdemetra.sa.SaSpecificationType"/>
+    </bindings>
+    <bindings scd="~tns:SaModelType">
+      <class ref="ec.eurostat.jdemetra.sa.SaModelType"/>
+    </bindings>
+    <bindings scd="~tns:StaticSaType">
+      <class ref="ec.eurostat.jdemetra.sa.StaticSaType"/>
+    </bindings>
+    <bindings scd="~tns:SaComponentEnum">
+      <typesafeEnumClass ref="ec.eurostat.jdemetra.sa.SaComponentEnum"/>
+    </bindings>
+    <bindings scd="~tns:DecompositionEnum">
+      <typesafeEnumClass ref="ec.eurostat.jdemetra.sa.DecompositionEnum"/>
+    </bindings>
+  </bindings>
+</bindings>
+

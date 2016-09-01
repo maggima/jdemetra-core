@@ -16,7 +16,8 @@
  */
 package ec.demetra.xml.core;
 
-import ec.tstoolkit.maths.matrices.Matrix;
+import ec.tstoolkit.timeseries.simplets.TsData;
+import ec.tstoolkit.timeseries.simplets.TsFrequency;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -34,54 +35,50 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.xml.sax.SAXException;
 import xml.Schemas;
-import xml.TestValidationEventHandler;
 
 /**
  *
  * @author Jean Palate
  */
-public class XmlMatrixTest {
+public class XmlTsDataTest {
 
-    private static final String FILE = "c:\\localdata\\xml\\matrix.xml";
+    private static final String FILE = "c:\\localdata\\xml\\tsdata.xml";
 
     @Test
     public void testMarshal() throws FileNotFoundException, JAXBException, IOException {
-        JAXBContext jaxb = JAXBContext.newInstance(XmlMatrix.class);
-        XmlMatrix xmat = new XmlMatrix();
-        Matrix m = new Matrix(5, 8);
-        m.set((r, c) -> (r + 1) * (c + 1));
-        xmat.copy(m);
+        JAXBContext jaxb = JAXBContext.newInstance(XmlTsData.class);
+        XmlTsData xTsData = new XmlTsData();
+        TsData tsdata = TsData.random(TsFrequency.Monthly);
+        xTsData.copy(tsdata);
+        xTsData.name = "TestTsData";
         FileOutputStream ostream = new FileOutputStream(FILE);
         try (OutputStreamWriter writer = new OutputStreamWriter(ostream, StandardCharsets.UTF_8)) {
             Marshaller marshaller = jaxb.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshaller.marshal(xmat, writer);
+            marshaller.marshal(xTsData, writer);
             writer.flush();
         }
 
-        XmlMatrix rslt = null;
+        XmlTsData rslt = null;
         FileInputStream istream = new FileInputStream(FILE);
         try (InputStreamReader reader = new InputStreamReader(istream, StandardCharsets.UTF_8)) {
             Unmarshaller unmarshaller = jaxb.createUnmarshaller();
-            unmarshaller.setSchema(Schemas.Core);
-            unmarshaller.setEventHandler(new TestValidationEventHandler());
-            rslt = (XmlMatrix) unmarshaller.unmarshal(reader);
-            Matrix m2 = rslt.create();
-            assertTrue(m.equals(m2, 1e-6));
+            rslt = (XmlTsData) unmarshaller.unmarshal(reader);
+            TsData ncoll = rslt.create();
+            assertTrue(ncoll.equals(tsdata));
         }
     }
 
     @Test
     public void testValidation() throws FileNotFoundException, JAXBException, IOException, SAXException {
-        JAXBContext jaxb = JAXBContext.newInstance(XmlMatrix.class);
-        XmlMatrix xmat = new XmlMatrix();
-        Matrix m = new Matrix(5, 8);
-        m.set((r, c) -> (r + 1) * (c + 1));
-        xmat.copy(m);
-        JAXBSource source = new JAXBSource(jaxb, xmat);
+        JAXBContext jaxb = JAXBContext.newInstance(XmlTsData.class);
+        XmlTsData xTsData = new XmlTsData();
+        TsData tsdata = TsData.random(TsFrequency.Monthly);
+        xTsData.copy(tsdata);
+        xTsData.name = "TestTsData";
+        JAXBSource source = new JAXBSource(jaxb, xTsData);
         Validator validator = Schemas.Core.newValidator();
         //validator.setErrorHandler(new TestErrorHandler());
         validator.validate(source);
     }
-
 }

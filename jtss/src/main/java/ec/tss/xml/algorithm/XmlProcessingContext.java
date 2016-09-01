@@ -33,15 +33,17 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = XmlProcessingContext.RNAME)
 @XmlType(name = XmlProcessingContext.NAME)
 public class XmlProcessingContext implements IXmlConverter<ProcessingContext> {
-    
+
     static final String NAME = "processingContextType";
     static final String RNAME = "processingContext";
+
     @XmlElement(name = "group")
     @XmlElementWrapper(name = "variables")
     public XmlTsVariables[] tsVariables;
+
     @XmlElement
     public XmlCalendars calendars;
-    
+
     @Override
     public ProcessingContext create() {
         ProcessingContext context = new ProcessingContext();
@@ -58,21 +60,21 @@ public class XmlProcessingContext implements IXmlConverter<ProcessingContext> {
         }
         return context;
     }
-    
+
     @Override
     public void copy(ProcessingContext t) {
-        calendars=new XmlCalendars();
+        calendars = new XmlCalendars();
         calendars.copy(t.getGregorianCalendars());
         int count = t.getTsVariableManagers().getCount();
-        if (count > 0){
-            tsVariables=new XmlTsVariables[count];
-            int i=0;
-            for (String n : t.getTsVariableManagers().getNames()){
+        if (count > 0) {
+            tsVariables = new XmlTsVariables[count];
+            int i = 0;
+            for (String n : t.getTsVariableManagers().getNames()) {
                 TsVariables cur = t.getTsVariables(n);
-                XmlTsVariables xcur=new XmlTsVariables();
-                xcur.name=n;
+                XmlTsVariables xcur = new XmlTsVariables();
+                xcur.name = n;
                 xcur.copy(cur);
-                tsVariables[i++]=xcur;
+                tsVariables[i++] = xcur;
             }
         }
     }
