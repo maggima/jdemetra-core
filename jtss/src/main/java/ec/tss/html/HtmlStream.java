@@ -92,7 +92,7 @@ public class HtmlStream implements Closeable {
      * @throws IOException
      */
     public void open() throws IOException {
-        this.writer.append("<html><body>");
+        this.writer.append("<html><head><link rel=\"stylesheet\" href=\"C:\\LocalData\\markdown.css\"></head><body class=\"markdown-body\">");
     }
 
     /**

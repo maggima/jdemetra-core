@@ -13,13 +13,14 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and 
 * limitations under the Licence.
-*/
-
+ */
 package ec.tss.html.implementation;
 
+import com.sun.xml.internal.ws.util.StringUtils;
 import ec.tss.html.AbstractHtmlElement;
 import ec.tss.html.HtmlStream;
 import ec.tss.html.HtmlStyle;
+import ec.tss.html.HtmlTag;
 import ec.tss.html.IHtmlElement;
 import ec.tstoolkit.algorithm.ProcDiagnostic;
 import ec.tstoolkit.algorithm.ProcQuality;
@@ -48,9 +49,8 @@ public class HtmlDiagnosticSummary extends AbstractHtmlElement implements IHtmlE
     }
 
     public void writeSummary(HtmlStream stream) throws IOException {
-        stream.write("summary", HtmlStyle.Bold).newLine();
+        stream.write(HtmlTag.HEADER3, "Summary");
         writeQuality(stream, null, ProcDiagnostic.summary(diags_), Double.NaN);
-        stream.newLine().newLine();
         List<Information<InformationSet>> subsets = diags_.select(InformationSet.class);
         for (Information<InformationSet> subset : subsets) {
             writeDiagnostic(stream, subset.name, subset.value);
@@ -58,14 +58,16 @@ public class HtmlDiagnosticSummary extends AbstractHtmlElement implements IHtmlE
     }
 
     private void writeDiagnostic(HtmlStream stream, String name, InformationSet diags) throws IOException {
-        stream.write(name, HtmlStyle.Bold).newLine();
+        stream.write(HtmlTag.HEADER4, StringUtils.capitalize(name));
         List<Information<ProcDiagnostic>> items = diags.select(ProcDiagnostic.class);
+        stream.open(HtmlTag.UNORDERED_LIST);
         for (Information<ProcDiagnostic> item : items) {
             ProcDiagnostic diag = item.value;
+            stream.open(HtmlTag.LIST_ELEMENT);
             writeQuality(stream, item.name, diag.quality, diag.value);
-            stream.newLine();
+            stream.close(HtmlTag.LIST_ELEMENT);
         }
-        stream.newLine();
+        stream.close(HtmlTag.UNORDERED_LIST);
     }
 
     private void writeQuality(HtmlStream stream, String test, ProcQuality q, double val) throws IOException {

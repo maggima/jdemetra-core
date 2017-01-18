@@ -18,10 +18,10 @@
 package ec.tss.html.implementation;
 
 import ec.tss.html.AbstractHtmlElement;
-import ec.tstoolkit.arima.IArimaModel;
 import ec.tss.html.HtmlStream;
 import ec.tss.html.HtmlStyle;
 import ec.tss.html.IHtmlElement;
+import ec.tstoolkit.arima.IArimaModel;
 import java.io.IOException;
 import java.util.Formatter;
 
@@ -74,7 +74,7 @@ public class HtmlArima extends AbstractHtmlElement implements IHtmlElement {
         double var = m_model.getInnovationVariance();
         if (Math.abs(var - 1) > EPS) {
             String val = new Formatter().format("%.5f", var).toString();
-            stream.write(". " + VAR).write(val);
+            stream.write(" - " + VAR).write(val);
         }
     }
 }

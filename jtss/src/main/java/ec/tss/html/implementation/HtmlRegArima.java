@@ -18,7 +18,6 @@ package ec.tss.html.implementation;
 
 import ec.tss.html.*;
 import ec.tstoolkit.Parameter;
-import ec.tstoolkit.arima.estimation.RegArimaModel;
 import ec.tstoolkit.dstats.T;
 import ec.tstoolkit.eco.ConcentratedLikelihood;
 import ec.tstoolkit.modelling.DefaultTransformationType;
@@ -27,12 +26,9 @@ import ec.tstoolkit.modelling.Variable;
 import ec.tstoolkit.modelling.arima.JointRegressionTest;
 import ec.tstoolkit.modelling.arima.PreprocessingModel;
 import ec.tstoolkit.sarima.SarimaComponent;
-import ec.tstoolkit.sarima.SarimaModel;
 import ec.tstoolkit.sarima.SarimaSpecification;
 import ec.tstoolkit.timeseries.calendars.LengthOfPeriodType;
-import ec.tstoolkit.timeseries.regression.EasterVariable;
 import ec.tstoolkit.timeseries.regression.GregorianCalendarVariables;
-import ec.tstoolkit.timeseries.regression.IEasterVariable;
 import ec.tstoolkit.timeseries.regression.ILengthOfPeriodVariable;
 import ec.tstoolkit.timeseries.regression.IMovingHolidayVariable;
 import ec.tstoolkit.timeseries.regression.IOutlierVariable;
@@ -41,7 +37,6 @@ import ec.tstoolkit.timeseries.regression.ITsVariable;
 import ec.tstoolkit.timeseries.regression.IUserTsVariable;
 import ec.tstoolkit.timeseries.regression.InterventionVariable;
 import ec.tstoolkit.timeseries.regression.MissingValueEstimation;
-import ec.tstoolkit.timeseries.regression.OutlierType;
 import ec.tstoolkit.timeseries.regression.Ramp;
 import ec.tstoolkit.timeseries.regression.TsVariableList;
 import ec.tstoolkit.timeseries.regression.TsVariableSelection;
@@ -91,43 +86,44 @@ public class HtmlRegArima extends AbstractHtmlElement {
 
     private void writeSummary(HtmlStream stream) throws IOException {
         TsFrequency context = model_.getFrequency();
-        stream.write(HtmlTag.HEADER1, h1, "Summary").newLine();
-        stream.write("Estimation span: [").write(model_.description.getEstimationDomain().getStart().toString());
-        stream.write(" - ").write(model_.description.getEstimationDomain().getLast().toString()).write(']').newLine();
-        stream.write(Integer.toString(model_.description.getEstimationDomain().getLength())).
-                write(" observations").newLine();
+        stream.write(HtmlTag.HEADER3, "Summary");
+        stream.open(HtmlTag.UNORDERED_LIST);
+        stream.write(HtmlTag.LIST_ELEMENT, "Estimation span: <code>["
+                + model_.description.getEstimationDomain().getStart().toString()
+                + " - " + model_.description.getEstimationDomain().getLast().toString() + "]</code>");
+        stream.write(HtmlTag.LIST_ELEMENT, Integer.toString(model_.description.getEstimationDomain().getLength()) + " observations");
         if (model_.description.getTransformation() == DefaultTransformationType.Log) {
-            stream.write("Series has been log-transformed").newLine();
+            stream.write(HtmlTag.LIST_ELEMENT, "Series has been log-transformed");
         }
         if (model_.description.getLengthOfPeriodType() != LengthOfPeriodType.None) {
-            stream.write("Series has been corrected for leap year").newLine();
+            stream.write(HtmlTag.LIST_ELEMENT, "Series has been corrected for leap year");
         }
         int ntd = model_.description.countRegressors(var -> var.isCalendar() && var.status.isSelected());
         if (ntd == 0) {
-            stream.write("No trading days effects").newLine();
+            stream.write(HtmlTag.LIST_ELEMENT, "No trading days effects");
         } else {
-            stream.write("Trading days effects (").write(Integer.toString(ntd)).write(ntd > 1 ? " variables)" : " variable)").newLine();
+            stream.write(HtmlTag.LIST_ELEMENT, "Trading days effects (" + Integer.toString(ntd) + (ntd > 1 ? " variables)" : " variable)"));
         }
         List<Variable> ee = model_.description.selectVariables(var -> var.isMovingHoliday() && var.status.isSelected());
         if (ee.isEmpty()) {
-            stream.write("No easter effect").newLine();
+            stream.write(HtmlTag.LIST_ELEMENT, "No easter effect");
         } else {
-            stream.write(ee.get(0).getVariable().getDescription(context) + " detected").newLine();
+            stream.write(HtmlTag.LIST_ELEMENT, ee.get(0).getVariable().getDescription(context) + " detected");
         }
         int no = model_.description.getOutliers().size();
         int npo = model_.description.getPrespecifiedOutliers().size();
 
         if (npo > 1) {
-            stream.write(Integer.toString(npo)).write(" pre-specified outliers").newLine();
+            stream.write(HtmlTag.LIST_ELEMENT, Integer.toString(npo)+ " pre-specified outliers");
         } else if (npo == 1) {
-            stream.write(Integer.toString(npo)).write(" pre-specified outlier").newLine();
+            stream.write(HtmlTag.LIST_ELEMENT, Integer.toString(npo) + " pre-specified outlier");
         }
         if (no > 1) {
-            stream.write(Integer.toString(no)).write(" detected outliers").newLine();
+            stream.write(HtmlTag.LIST_ELEMENT, Integer.toString(no) + " detected outliers");
         } else if (no == 1) {
-            stream.write(Integer.toString(no)).write(" detected outlier").newLine();
+            stream.write(HtmlTag.LIST_ELEMENT, Integer.toString(no) + " detected outlier");
         }
-        stream.write(HtmlTag.LINEBREAK);
+        stream.close(HtmlTag.UNORDERED_LIST);
     }
 
     public void writeDetails(HtmlStream stream) throws IOException {
@@ -136,16 +132,16 @@ public class HtmlRegArima extends AbstractHtmlElement {
 
     public void writeDetails(HtmlStream stream, boolean outliers) throws IOException {
         // write likelihood
-        stream.write(HtmlTag.HEADER1, h1, "Final model");
+        stream.write(HtmlTag.HEADER1, "Final model");
         stream.newLine();
-        stream.write(HtmlTag.HEADER2, h2, "Likelihood statistics");
+        stream.write(HtmlTag.HEADER2, "Likelihood statistics");
         stream.write(new HtmlLikelihood(model_.estimation.getStatistics()));
         writeScore(stream);
         stream.write(HtmlTag.LINEBREAK);
-        stream.write(HtmlTag.HEADER2, h2, "Arima model");
+        stream.write(HtmlTag.HEADER2, "Arima model");
         writeArima(stream);
         stream.write(HtmlTag.LINEBREAK);
-        stream.write(HtmlTag.HEADER2, h2, "Regression model");
+        stream.write(HtmlTag.HEADER2, "Regression model");
         writeRegression(stream, outliers);
         stream.write(HtmlTag.LINEBREAK);
     }
@@ -245,18 +241,18 @@ public class HtmlRegArima extends AbstractHtmlElement {
         writeRegressionItems(stream, context, true, var -> var instanceof ITradingDaysVariable);
         writeRegressionItems(stream, context, false, var -> var instanceof ILengthOfPeriodVariable);
         writeFixedRegressionItems(stream, "Fixed calendar effects", context, var -> var.isCalendar());
-        writeRegressionItems(stream, context, false, var->var instanceof IMovingHolidayVariable);
+        writeRegressionItems(stream, context, false, var -> var instanceof IMovingHolidayVariable);
         writeFixedRegressionItems(stream, "Fixed moving holidays effects", context, var -> var.isMovingHoliday());
         if (outliers) {
             writeOutliers(stream, true, context);
             writeOutliers(stream, false, context);
-            writeFixedRegressionItems(stream, "Fixed outliers", context, var->var.isOutlier());
+            writeFixedRegressionItems(stream, "Fixed outliers", context, var -> var.isOutlier());
         }
-        writeRegressionItems(stream, "Ramps", context, var->var instanceof Ramp);
-        writeRegressionItems(stream, "Intervention variables", context, var->var instanceof InterventionVariable);
-        writeRegressionItems(stream, "Ramps", context, var->var instanceof IUserTsVariable 
+        writeRegressionItems(stream, "Ramps", context, var -> var instanceof Ramp);
+        writeRegressionItems(stream, "Intervention variables", context, var -> var instanceof InterventionVariable);
+        writeRegressionItems(stream, "Ramps", context, var -> var instanceof IUserTsVariable
                 && !(var instanceof InterventionVariable) && !(var instanceof Ramp));
-        writeFixedRegressionItems(stream, "Fixed other regression effects", context, var->var.isUser());
+        writeFixedRegressionItems(stream, "Fixed other regression effects", context, var -> var.isUser());
         writeMissing(stream);
     }
 

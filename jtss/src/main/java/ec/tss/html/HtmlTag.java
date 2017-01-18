@@ -13,13 +13,11 @@
 * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 * See the Licence for the specific language governing permissions and 
 * limitations under the Licence.
-*/
-
-
+ */
 package ec.tss.html;
 
 /**
- * 
+ *
  * @author Kristof Bayens, Jean Palate
  */
 public enum HtmlTag {
@@ -29,7 +27,7 @@ public enum HtmlTag {
      */
     HEADER1("h1"),
     /**
-     * 
+     *
      */
     HEADER2("h2"),
     /**
@@ -37,28 +35,28 @@ public enum HtmlTag {
      */
     HEADER3("h3"),
     /**
-     * 
+     *
      */
     HEADER4("h4"),
     /**
      *
      */
-    HEADER5("h1"),
+    HEADER5("h5"),
     /**
-     * 
+     *
      */
     HEADER6(
-    "h6"),
+            "h6"),
     /**
      *
      */
     LINEBREAK("hr"),
     /**
-     * 
+     *
      */
     DIV("div"),
     /**
-     * 
+     *
      */
     TABLE("table"),
     /**
@@ -66,19 +64,22 @@ public enum HtmlTag {
      */
     TABLEROW("tr"),
     /**
-     * 
+     *
      */
     TABLEHEADER("th"),
     /**
      *
      */
     TABLECELL("td"),
-    SUMMARY("summary")
-    ;
+    ORDERED_LIST("ol"),
+    UNORDERED_LIST("ul"),
+    LIST_ELEMENT("li"),
+    CODE("code"),
+    SUMMARY("summary");
 
     final String tag;
 
     private HtmlTag(String str) {
-	tag = str;
+        tag = str;
     }
 }

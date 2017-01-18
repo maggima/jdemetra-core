@@ -71,28 +71,26 @@ public class HtmlProcessingInformation extends AbstractHtmlElement {
         if (err) {
             List<String> errs = ProcessingInformation.getErrorMessages(infos_);
             if (!errs.isEmpty()) {
-                stream.write(HtmlTag.HEADER2, h2, "Errors").newLine();
+                stream.write(HtmlTag.HEADER2, "Errors");
                 for (String err : errs) {
                     stream.write(err, HtmlStyle.Red, HtmlStyle.Bold).newLine();
                 }
-                stream.newLine();
             }
         }
         if (wrn) {
             List<String> msg = ProcessingInformation.getWarningMessages(infos_);
             if (!msg.isEmpty()) {
-                stream.write(HtmlTag.HEADER2, h2, "Warnings").newLine();
+                stream.write(HtmlTag.HEADER2, "Warnings");
                 for (String m : msg) {
                     stream.write(m, HtmlStyle.Blue).newLine();
                 }
-                stream.newLine();
             }
         }
         if (info) {
             if (!verbose) {
                 List<String> msg = ProcessingInformation.getMessages(infos_, ProcessingInformation.InformationType.Info);
                 if (!msg.isEmpty()) {
-                    stream.write(HtmlTag.HEADER2, h2, "Log").newLine();
+                    stream.write(HtmlTag.HEADER2, "Log");
                     for (String m : msg) {
                         stream.write(m).newLine();
                     }
