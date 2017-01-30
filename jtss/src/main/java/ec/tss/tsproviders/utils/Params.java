@@ -110,6 +110,11 @@ public final class Params {
     public static <S extends IConfig> IParam<S, ObsGathering> onObsGathering(@Nonnull ObsGathering defaultValue, @Nonnull String frequencyKey, @Nonnull String aggregationKey, @Nonnull String skipKey) {
         return new ObsGatheringParam(defaultValue, frequencyKey, aggregationKey, skipKey);
     }
+    
+    @Nonnull
+    public static <S extends IConfig> IParam<S, String[]> onStringArray(@Nonnull String key, @Nonnull String... defaultValues) {
+        return new SingleParam<>(defaultValues, key, Parsers.stringArrayParser(), Formatters.stringArrayFormatter());
+    }
 
     //<editor-fold defaultstate="collapsed" desc="Internal implementation">
     private static final class SingleParam<S extends IConfig, P> implements IParam<S, P> {
